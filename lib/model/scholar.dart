@@ -160,7 +160,8 @@ class Scholar {
     }
     _mutex++;
     try {
-      return await _spider?.getEverything().then((value) async {
+      final semName = thisSemester.name;
+      return await _spider?.getEverything(semName).then((value) async {
             for (var e in value.item1) {
               // ignore: avoid_print
               if (e != null) print(e);

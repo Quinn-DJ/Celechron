@@ -206,7 +206,7 @@ class UgrsSpider implements Spider {
           List<Grade>,
           List<double>,
           Map<DateTime, String>,
-          List<Todo>>> getEverything() async {
+          List<Todo>>> getEverything([String? currentSemesterName]) async {
     var fetches = <Future<String?>>[];
     List<String> fetchSequence = ['校历', '课表', '考试', '成绩', '主修', '作业', '实践'];
 
@@ -431,7 +431,7 @@ class UgrsSpider implements Spider {
 
     // 作业（学在浙大）- 加上重试包装
     fetches
-        .add(_fetchWithRetry(() => _courses.getTodo(_httpClient)).then((value) {
+        .add(_fetchWithRetry(() => _courses.getTodo(_httpClient, currentSemesterName)).then((value) {
       outTodos.clear();
       outTodos.addAll(value.item2);
       return value.item1?.toString();
@@ -514,7 +514,7 @@ class MockSpider extends UgrsSpider {
           List<Grade>,
           List<double>,
           Map<DateTime, String>,
-          List<Todo>>> getEverything() async {
+          List<Todo>>> getEverything([String? currentSemesterName]) async {
     await Future.delayed(const Duration(seconds: 2));
     return Tuple7(
         [null, null],

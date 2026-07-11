@@ -24,7 +24,8 @@ abstract class Spider {
           List<Grade>,
           List<double>,
           Map<DateTime, String>,
-          List<Todo>>> getEverything() async {
+          List<Todo>>> getEverything(
+          [String? currentSemesterName]) async {
     throw UnimplementedError();
   }
 }

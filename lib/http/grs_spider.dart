@@ -214,7 +214,7 @@ class GrsSpider implements Spider {
           List<Grade>,
           List<double>,
           Map<DateTime, String>,
-          List<Todo>>> getEverything() async {
+          List<Todo>>> getEverything([String? currentSemesterName]) async {
     // 返回值初始化
     var outSemesters = <Semester>[];
     var outGrades = <Grade>[];
@@ -476,7 +476,7 @@ class GrsSpider implements Spider {
 
     // 学在浙大
     fetches
-        .add(_fetchWithRetry(() => _courses.getTodo(_httpClient)).then((value) {
+        .add(_fetchWithRetry(() => _courses.getTodo(_httpClient, currentSemesterName)).then((value) {
       outTodos.clear();
       outTodos.addAll(value.item2);
       return value.item1?.toString();
